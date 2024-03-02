@@ -31,6 +31,8 @@ app.use('/api', require('./routes/userLogin'))
 
 app.use('/api', require('./routes/displayFoodData'))
 
+app.use('/api', require('./routes/createOrder'))
+
 app.listen(port, () => {
   console.log(`Food Express app listening on port ${port}`)
 })
