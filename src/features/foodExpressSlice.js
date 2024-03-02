@@ -36,7 +36,7 @@ export const foodExpressSlice = createSlice({
                 state.quantity[index] += 1
             }
             if (type === 'decrement' && state.quantity[index] > 0) {
-                state.quantity[index] -= 1  
+                state.quantity[index] -= 1
             }
             state.itemTotalPrice[index] = state.price[index] * state.quantity[index]
         }),
@@ -68,6 +68,11 @@ export const foodExpressSlice = createSlice({
                     state.cartData = state.cartData.filter((_, i) => i !== index)
                     break;
 
+                case 'RESET_CART':
+                    state.cartData = []
+                    state.quantity = state.quantity.fill(0)
+                    state.itemTotalPrice = state.itemTotalPrice.fill(0)
+                    break;
                 default:
                     return state
             }

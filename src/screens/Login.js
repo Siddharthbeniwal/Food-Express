@@ -26,6 +26,8 @@ const Login = () => {
 
         if (userLoginResponse.success) {
             localStorage.setItem('authToken', userLoginResponse.authToken)
+            localStorage.setItem('userEmail', userLoginResponse.userData.email)
+            localStorage.setItem('username', userLoginResponse.userData.username)
             navigate('/')
             
         } else {

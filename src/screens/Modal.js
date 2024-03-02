@@ -1,11 +1,40 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { API_URLS } from '../appConstants'
+import { handleCart } from '../features/foodExpressSlice'
 
 export default function Modal({ onClose }) {
 
   const cartData = useSelector(state => state.cartData)
+  const dispatch = useDispatch()
   const totalAmt = cartData.reduce((acc, curr) => acc += curr.price, 0)
+
+  async function createOrder() {
+    const username = localStorage.getItem('username')
+    const userEmail = localStorage.getItem('userEmail')
+    const response = await fetch(API_URLS.CREATE_ORDER, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: userEmail,
+        username: username,
+        orderDate: new Date().toDateString(),
+        orderData: cartData
+      })
+    })
+
+    const res = await response.json()
+
+    if (res.success) {
+      alert('Order placed successfully!')
+      dispatch(handleCart({ type: 'RESET_CART' }))
+    } else {
+      alert('Failed to place order!')
+    }
+  }
 
   return ReactDom.createPortal(
     <>
@@ -37,8 +66,11 @@ export default function Modal({ onClose }) {
               </tr>
               <tr>
                 <td style={{ borderColor: 'transparent' }} />
-                <button className='bg-success'>
-                  Checkout
+                <button
+                  className='fw-bold mt-4'
+                  onClick={() => { createOrder(); onClose() }}
+                >
+                  Place Order
                 </button>
               </tr>
             </tfoot>
