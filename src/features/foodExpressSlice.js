@@ -4,8 +4,9 @@ const initialState = {
     quantity: [],
     price: [],
     itemTotalPrice: [],
-    searchInput: '',
-    cartData: []
+    cartData: [],
+    originalFoodList: [],
+    foodList: []
 }
 
 export const foodExpressSlice = createSlice({
@@ -41,8 +42,28 @@ export const foodExpressSlice = createSlice({
             state.itemTotalPrice[index] = state.price[index] * state.quantity[index]
         }),
 
-        searchFood: ((state, action) => {
-            //search logic to be added
+        filterFoodList: ((state, action) => {
+
+            switch (action.payload.type) {
+
+                case 'SET_FOOD_LIST':
+                    state.originalFoodList = action.payload.data
+                    state.foodList = action.payload.data
+                    break;
+
+                case 'FILTER_FOOD_LIST':
+                    let searchInput = action.payload.searchInput.toLowerCase()
+                    if (searchInput) {
+                        state.foodList = state.originalFoodList.filter((item) => item.name.toLowerCase().includes(searchInput))
+                    } else {
+                        state.foodList = state.originalFoodList
+                    }
+                    break;
+
+                default:
+                    return state;
+            }
+
         }),
 
         handleCart: ((state, action) => {
@@ -74,7 +95,7 @@ export const foodExpressSlice = createSlice({
                     state.itemTotalPrice = state.itemTotalPrice.fill(0)
                     break;
                 default:
-                    return state
+                    return state;
             }
         })
     }
@@ -82,4 +103,4 @@ export const foodExpressSlice = createSlice({
 
 export default foodExpressSlice.reducer;
 
-export const { handleQuantity, setInitialData, handleCart } = foodExpressSlice.actions
+export const { handleQuantity, setInitialData, handleCart, filterFoodList } = foodExpressSlice.actions

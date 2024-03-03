@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { API_URLS } from '../appConstants'
 import { useSelector, useDispatch } from 'react-redux'
-import { setInitialData, handleQuantity, handleCart } from '../features/foodExpressSlice'
+import { setInitialData, handleQuantity, handleCart, filterFoodList } from '../features/foodExpressSlice'
 
 const Cards = () => {
 
-  const [foodData, setFoodData] = useState([])
+  // const [foodData, setFoodData] = useState([])
   const [foodCat, setFoodCat] = useState([])
 
   const quantity = useSelector(state => state.quantity)
   const price = useSelector(state => state.price)
   const itemTotalPrice = useSelector(state => state.itemTotalPrice)
   const cartData = useSelector(state => state.cartData)
+  const foodData = useSelector(state => state.foodList)
 
   const dispatch = useDispatch()
 
@@ -34,7 +35,7 @@ const Cards = () => {
             dispatch(setInitialData({ price: price, type: 'SET_PRICE' }))
           });
 
-          setFoodData(displayData.foodData)
+          dispatch(filterFoodList({ data: displayData.foodData, type: 'SET_FOOD_LIST' }))
         }
         if (displayData.foodCategory.length > 0) {
           setFoodCat(displayData.foodCategory)
@@ -98,68 +99,69 @@ const Cards = () => {
         <h1>No data available</h1>
       ) : (
         <>
-          {foodCat.map((name) => (
-            <div className='row mb-3' key={name._id}>
-              <h1 className='fs-3 m-3'>
-                {name.CategoryName}
-              </h1>
-              <hr />
-              {foodData.length === 0 ? (
-                <h1>No data available</h1>
-              ) : (
-                foodData.filter((data) => data.CategoryName === name.CategoryName).map((item) => {
-                  const itemIndex = indexCount++;
-                  return (
-                    <div className="col-md-4 mb-3" key={item._id}>
-                      <div className="card food-card">
-                        <img src={item.img} className="card-img-top" alt="img" style={{ height: '240px' }} />
+          {foodCat.map((name) => {
+            const filteredItems = foodData.filter((data) => data.CategoryName === name.CategoryName);
+            return filteredItems.length > 0 ?
+              <div className='row mb-3' key={name._id}>
+                <h1 className='fs-3 m-3'>
+                  {name.CategoryName}
+                </h1>
+                <hr />
+                {foodData.length === 0 ? (
+                  <h1>No data available</h1>
+                ) : (
+                  foodData.filter((data) => data.CategoryName === name.CategoryName).map((item) => {
+                    const itemIndex = indexCount++;
+                    return (
+                      <div className="col-md-4 mb-3" key={item._id}>
+                        <div className="card food-card">
+                          <img src={item.img} className="card-img-top" alt="img" style={{ height: '240px' }} />
 
-                        <div className="card-body h-180px">
-                          <h5 className="card-title fw-bold">{item.name}</h5>
-                          <p className="card-text">{item.description}</p>
-                          <div className="btn-group" role="group" aria-label="Basic outlined example">
-                            <button
-                              type="button"
-                              className="btn btn-outline-success"
-                              onClick={() => changeQuantity('decrement', itemIndex, item.name)}
-                            >-
-                            </button>
+                          <div className="card-body h-180px">
+                            <h5 className="card-title fw-bold">{item.name}</h5>
+                            <p className="card-text">{item.description}</p>
+                            <div className="btn-group" role="group" aria-label="Basic outlined example">
+                              <button
+                                type="button"
+                                className="btn btn-outline-success"
+                                onClick={() => changeQuantity('decrement', itemIndex, item.name)}
+                              >-
+                              </button>
 
-                            <button
-                              className="btn btn-outline-success text-white bg-success"
-                              disabled>{quantity[itemIndex]}
-                            </button>
+                              <button
+                                className="btn btn-outline-success text-white bg-success"
+                                disabled>{quantity[itemIndex]}
+                              </button>
 
-                            <button
-                              type="button"
-                              className="btn btn-outline-success"
-                              onClick={() => changeQuantity('increment', itemIndex)}
-                            >+</button>
+                              <button
+                                type="button"
+                                className="btn btn-outline-success"
+                                onClick={() => changeQuantity('increment', itemIndex)}
+                              >+</button>
 
-                            <div style={{ marginLeft: '25px' }}>
-                              Price: Rs. {price[itemIndex]}
+                              <div style={{ marginLeft: '25px' }}>
+                                Price: Rs. {price[itemIndex]}
+                              </div>
                             </div>
+                            <p className="card-text ml-4">
+                              Total: Rs. {itemTotalPrice[itemIndex]}
+                            </p>
                           </div>
-                          <p className="card-text ml-4">
-                            Total: Rs. {itemTotalPrice[itemIndex]}
-                          </p>
+                          <button
+                            className='bg-success text-white fw-bold rounded-2'
+                            onClick={() => handleAddToCart(itemIndex, item.name)}
+                          >Add to Cart
+                          </button>
                         </div>
-                        <button
-                          className='bg-success text-white fw-bold rounded-2'
-                          onClick={() => handleAddToCart(itemIndex, item.name)}
-                        >Add to Cart
-                        </button>
                       </div>
-                    </div>
-                  )
-                })
-              )}
-            </div>
-          ))}
+                    )
+                  })
+                )}
+              </div> : null
+          })}
         </>
       )}
     </div>
-
   )
 }
 

@@ -1,15 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { filterFoodList } from '../features/foodExpressSlice'
 
 const Carousel = () => {
+    const dispatch = useDispatch()
+    const [searchInput, setSearchInput] = useState('')
+
+    const handleSearch = (value) => {
+        setSearchInput(value)
+
+        dispatch(filterFoodList({
+            type: 'FILTER_FOOD_LIST',
+            searchInput: value,
+        }));
+    };
+
     return (
         <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
 
             <div className="carousel-inner">
                 <div className="carousel-caption" style={{ zIndex: 1 }}>
-                    <form className="d-flex">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button className="btn btn-success" type="submit">Search</button>
-                    </form>
+                    <div className="d-flex">
+                        <input
+                            className="form-control me-2"
+                            type="search"
+                            placeholder="Search"
+                            aria-label="Search"
+                            value={searchInput}
+                            onInput={(e) => {
+                                handleSearch(e.target.value);
+                            }
+                            }
+                        />
+                    </div>
                 </div>
 
                 <div className="carousel-item active">
