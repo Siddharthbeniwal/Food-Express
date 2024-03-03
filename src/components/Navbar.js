@@ -21,27 +21,27 @@ const Navbar = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link className="nav-link active text-white" aria-current="page" to="/">Home</Link>
+                                <Link className="nav-link text-white" aria-current="page" to="/">Home</Link>
                             </li>
                             {(localStorage.getItem('authToken')) ? <li className="nav-item">
-                                <Link className="nav-link text-white" to="/">My Orders</Link>
+                                <Link className="nav-link text-white" to="/myOrders">My Orders</Link>
                             </li> : ''}
                         </ul>
 
                         {!(localStorage.getItem('authToken')) ?
                             <div className='d-flex'>
-                                <Link className="nav-link active text-success bg-white me-3" aria-current="page" to="/login">Login</Link>
-                                <Link className="nav-link active text-success bg-white me-3" aria-current="page" to="/signUp">Sign Up</Link>
+                                <Link className="nav-link text-success bg-white me-3" aria-current="page" to="/login">Login</Link>
+                                <Link className="nav-link text-success bg-white me-3" aria-current="page" to="/signUp">Sign Up</Link>
                             </div> :
 
                             <div className='d-flex'>
-                                <Link className="nav-link active text-success bg-white me-3" aria-current="page"
+                                <Link className="nav-link text-success bg-white me-3" aria-current="page"
                                     onClick={() => setShowCart(true)}
                                 >Cart {'  '}
                                     <Badge pill bg='danger'>{cartData.length}</Badge>
                                 </Link>
 
-                                <Link className="nav-link active text-success bg-white me-3" aria-current="page"
+                                <Link className="nav-link text-danger bg-white me-3" aria-current="page"
                                     onClick={() => localStorage.removeItem('authToken')} to="/login">Log Out</Link>
 
                                 {showCart ?
