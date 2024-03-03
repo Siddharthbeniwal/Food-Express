@@ -10,10 +10,10 @@ router.post('/createOrder',
                 await Order.create({
                     email: req.body.email,
                     username: req.body.username,
-                    orderData: [[
-                        { orderDate: req.body.orderDate },
-                        req.body.orderData
-                    ]]
+                    orderData: [{
+                        orderDate: req.body.orderDate,
+                        data: req.body.orderData
+                    }]
                 }).then(() => {
                     res.send({
                         success: true,
@@ -31,9 +31,10 @@ router.post('/createOrder',
                 await Order.findOneAndUpdate({ email: req.body.email },
                     {
                         $push: {
-                            orderData: [
-                                { orderDate: req.body.orderDate },
-                                req.body.orderData]
+                            orderData: {
+                                orderDate: req.body.orderDate,
+                                data: req.body.orderData
+                            }
                         }
                     }
                 ).then(() => {

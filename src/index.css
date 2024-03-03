@@ -98,14 +98,45 @@ hr {
 .cart-table td:nth-child(2) {
   width: 10%;
 }
+
 .cart-table th:nth-child(1),
 .cart-table td:nth-child(1) {
   width: 30%;
 }
 
-
 .cart-table th, .cart-table td {
   border: solid 2px  #13f478;
   padding: 8px;
   text-align: left;
+}
+
+
+/* MyOrders table CSS starts here*/
+.order-table {
+  width: 25%;
+  margin-left: 10%;
+  margin-top: 80px;
+}
+
+.order-table th:nth-child(1),
+.order-table td:nth-child(1) {
+  width: 30%;
+}
+
+.order-table th:nth-child(2),
+.order-table td:nth-child(2),
+.order-table th:nth-child(3),
+.order-table td:nth-child(3) {
+  width: 5%;
+}
+
+.order-table td {
+  border: solid 2px  #13f478;
+  padding: 8px;
+  color: white;
+}
+
+.order-table th {
+  color: #063913;
+  background-color: rgb(156, 222, 191);
 }

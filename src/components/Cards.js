@@ -145,8 +145,9 @@ const Cards = () => {
                           </p>
                         </div>
                         <button
+                          className='bg-success text-white fw-bold rounded-2'
                           onClick={() => handleAddToCart(itemIndex, item.name)}
-                        >Add to cart
+                        >Add to Cart
                         </button>
                       </div>
                     </div>
