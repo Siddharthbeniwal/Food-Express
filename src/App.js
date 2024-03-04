@@ -4,6 +4,7 @@ import Login from './screens/Login';
 import SignUp from './screens/SignUp';
 import Navbar from './components/Navbar';
 import MyOrders from './screens/MyOrders';
+import AboutUs from './screens/AboutUs';
 
 import {
   BrowserRouter as Router,
@@ -23,6 +24,7 @@ function App() {
           <Route exact path = '/login' element = {<Login/>} />
           <Route exact path = '/signUp' element = {<SignUp/>}/>
           <Route exact path = '/myOrders' element = {<MyOrders/>}/>
+          <Route exact path = '/aboutUs' element = {<AboutUs/>}/>
         </Routes>
       </div>
     </Router>
