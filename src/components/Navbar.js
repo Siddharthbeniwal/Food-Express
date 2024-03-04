@@ -1,14 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Modal from '../screens/Modal'
 import { Badge } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setIsLoggedIn } from '../features/foodExpressSlice'
 
 const Navbar = () => {
 
     const [showCart, setShowCart] = useState(false)
 
+    const dispatch = useDispatch()
     const cartData = useSelector(state => state.cartData)
+    const isLoggedIn = useSelector(state => state.isLoggedIn)
+
+    const clearData = () => {
+        dispatch(setIsLoggedIn({ type: 'LOGOUT' }))
+        localStorage.removeItem('authToken')
+        localStorage.removeItem('username')
+        localStorage.removeItem('userEmail')
+    }
+
+    useEffect(() => { }, [isLoggedIn])
 
     return (
         <div>
@@ -23,12 +35,21 @@ const Navbar = () => {
                             <li className="nav-item">
                                 <Link className="nav-link text-white" aria-current="page" to="/">Home</Link>
                             </li>
-                            {(localStorage.getItem('authToken')) ? <li className="nav-item">
+
+                            <li className="nav-item">
+                                <Link className="nav-link text-white" aria-current="page" to="/aboutUs">About Us</Link>
+                            </li>
+
+                            {isLoggedIn ? <li className="nav-item">
                                 <Link className="nav-link text-white" to="/myOrders">My Orders</Link>
                             </li> : ''}
                         </ul>
 
-                        {!(localStorage.getItem('authToken')) ?
+                        {isLoggedIn && localStorage.getItem('username') ? <l className="nav-link text-white fs-5 mx-5">
+                            Hello, {localStorage.getItem('username')}
+                        </l> : ''}
+
+                        {!isLoggedIn ?
                             <div className='d-flex'>
                                 <Link className="nav-link text-success bg-white me-3" aria-current="page" to="/login">Login</Link>
                                 <Link className="nav-link text-success bg-white me-3" aria-current="page" to="/signUp">Sign Up</Link>
@@ -42,7 +63,10 @@ const Navbar = () => {
                                 </Link>
 
                                 <Link className="nav-link text-danger bg-white me-3" aria-current="page"
-                                    onClick={() => localStorage.removeItem('authToken')} to="/login">Log Out</Link>
+                                    onClick={() =>
+                                        clearData()
+                                    }
+                                    to="/login">Log Out</Link>
 
                                 {showCart ?
                                     <Modal

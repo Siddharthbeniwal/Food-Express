@@ -6,13 +6,32 @@ const initialState = {
     itemTotalPrice: [],
     cartData: [],
     originalFoodList: [],
-    foodList: []
+    foodList: [],
+    isLoggedIn: false
 }
 
 export const foodExpressSlice = createSlice({
     name: 'foodExpress',
     initialState,
     reducers: {
+
+        setIsLoggedIn: ((state, action) => {
+
+            switch (action.payload.type) {
+
+                case 'LOGIN':
+                    state.isLoggedIn = true
+                    break;
+
+                case 'LOGOUT':
+                    state.isLoggedIn = false
+                    break;
+
+                default:
+                    return state;
+
+            }
+        }),
 
         setInitialData: ((state, action) => {
             switch (action.payload.type) {
@@ -103,4 +122,4 @@ export const foodExpressSlice = createSlice({
 
 export default foodExpressSlice.reducer;
 
-export const { handleQuantity, setInitialData, handleCart, filterFoodList } = foodExpressSlice.actions
+export const { setIsLoggedIn, handleQuantity, setInitialData, handleCart, filterFoodList } = foodExpressSlice.actions

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { API_URLS } from '../appConstants';
+import { setIsLoggedIn } from '../features/foodExpressSlice'
+import { useDispatch, useSelector } from 'react-redux';
 
 const Login = () => {
 
@@ -9,6 +11,8 @@ const Login = () => {
         email: '',
         password: ''
     })
+
+    const dispatch = useDispatch();
 
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -28,6 +32,7 @@ const Login = () => {
             localStorage.setItem('authToken', userLoginResponse.authToken)
             localStorage.setItem('userEmail', userLoginResponse.userData.email)
             localStorage.setItem('username', userLoginResponse.userData.username)
+            dispatch(setIsLoggedIn({type: 'LOGIN'}))
             navigate('/')
             
         } else {
