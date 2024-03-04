@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { API_URLS } from '../appConstants';
+import { API_URLS, ABOUT_US_INFO } from '../appConstants';
 import { setIsLoggedIn } from '../features/foodExpressSlice'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Login = () => {
 
     const navigate = useNavigate();
     const [userCredentials, setUserCredentials] = useState({
-        email: '',
-        password: ''
+        email: ABOUT_US_INFO.CREDENTIAL,
+        password: ABOUT_US_INFO.CREDENTIAL
     })
+    const [showPassword, setShowPassword] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -32,9 +36,9 @@ const Login = () => {
             localStorage.setItem('authToken', userLoginResponse.authToken)
             localStorage.setItem('userEmail', userLoginResponse.userData.email)
             localStorage.setItem('username', userLoginResponse.userData.username)
-            dispatch(setIsLoggedIn({type: 'LOGIN'}))
+            dispatch(setIsLoggedIn({ type: 'LOGIN' }))
             navigate('/')
-            
+
         } else {
             alert('Please enter valid credentials')
         }
@@ -47,10 +51,16 @@ const Login = () => {
             [e.target.name]: e.target.value
         })
     }
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
         <div className='form-container'>
             <form>
                 <h1 className='heading'>Login</h1>
+
                 <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <input
@@ -62,28 +72,45 @@ const Login = () => {
                         onChange={(e) => handleChange(e)
                         } aria-describedby="emailHelp" placeholder="Enter email" />
                 </div>
+
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        id="password"
-                        name="password"
-                        value={userCredentials.password}
-                        onChange={(e) => handleChange(e)}
-                        placeholder="Password" />
+
+                    <div className='d-flex align-items-center'>
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            className="form-control"
+                            id="password"
+                            name="password"
+                            value={userCredentials.password}
+                            onChange={(e) => handleChange(e)}
+                            placeholder="Password"
+                        />
+
+                        <span style={{ marginLeft: '-25px' }}>
+                            <FontAwesomeIcon
+                                icon={showPassword ? faEyeSlash : faEye}
+                                className="eye-icon"
+                                onClick={togglePasswordVisibility}
+                            />
+                        </span>
+                    </div>
+
                 </div>
+
                 <button
                     type="submit"
                     className="btn btn-primary bg-success"
                     onClick={handleLogin}
                 >Login
                 </button>
+
                 <Link
                     to="/signUp"
                     className="m-3 btn btn-primary"
                 >New user?
                 </Link>
+
             </form>
         </div>
     )

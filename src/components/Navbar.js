@@ -37,7 +37,7 @@ const Navbar = () => {
                             </li>
 
                             <li className="nav-item">
-                                <Link className="nav-link text-white" aria-current="page" to="/aboutUs">About Us</Link>
+                                <Link className="nav-link text-white" aria-current="page" to="/aboutUs">Information</Link>
                             </li>
 
                             {isLoggedIn ? <li className="nav-item">
