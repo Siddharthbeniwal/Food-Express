@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { API_URLS } from '../appConstants'
+import { API_URLS, LOGIN_ALERT_MSG } from '../appConstants'
 import { useSelector, useDispatch } from 'react-redux'
 import { setInitialData, handleQuantity, handleCart, filterFoodList } from '../features/foodExpressSlice'
 
@@ -13,6 +13,7 @@ const Cards = () => {
   const cartData = useSelector(state => state.cartData)
   const foodData = useSelector(state => state.foodList)
   const originalFoodData = useSelector(state => state.originalFoodList)
+  const isLoggedIn = useSelector(state => state.isLoggedIn)
 
   const dispatch = useDispatch()
 
@@ -51,6 +52,11 @@ const Cards = () => {
 
   const changeQuantity = (type, index, name) => {
 
+    if(!isLoggedIn) {
+      alert(LOGIN_ALERT_MSG);
+      return;
+    }
+
     dispatch(handleQuantity({
       type: type,
       index
@@ -68,6 +74,11 @@ const Cards = () => {
   }
 
   const handleAddToCart = (index, name) => {
+
+    if(!isLoggedIn) {
+      alert(LOGIN_ALERT_MSG);
+      return;
+    }
 
     let cartIndex = cartData.length > 0 ? cartData.findIndex(((data) => data.name === name)) : -1
 
