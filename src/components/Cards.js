@@ -5,7 +5,6 @@ import { setInitialData, handleQuantity, handleCart, filterFoodList } from '../f
 
 const Cards = () => {
 
-  // const [foodData, setFoodData] = useState([])
   const [foodCat, setFoodCat] = useState([])
 
   const quantity = useSelector(state => state.quantity)
@@ -13,6 +12,7 @@ const Cards = () => {
   const itemTotalPrice = useSelector(state => state.itemTotalPrice)
   const cartData = useSelector(state => state.cartData)
   const foodData = useSelector(state => state.foodList)
+  const originalFoodData = useSelector(state => state.originalFoodList)
 
   const dispatch = useDispatch()
 
@@ -91,27 +91,21 @@ const Cards = () => {
     }
   }
 
-  let indexCount = 0;
-
   return (
     <div className='food-card-container container'>
       {foodCat.length === 0 ? (
         <h1>No data available</h1>
       ) : (
         <>
-          {foodCat.map((name) => {
-            const filteredItems = foodData.filter((data) => data.CategoryName === name.CategoryName);
-            return filteredItems.length > 0 ?
-              <div className='row mb-3' key={name._id}>
-                <h1 className='fs-3 m-3'>
-                  {name.CategoryName}
-                </h1>
+          {foodCat.map((category) => {
+            const filteredItems = foodData.filter((item) => item.CategoryName === category.CategoryName);
+            return filteredItems.length > 0 ? (
+              <div key={category._id}>
+                <h1 className='fs-3 m-3'>{category.CategoryName}</h1>
                 <hr />
-                {foodData.length === 0 ? (
-                  <h1>No data available</h1>
-                ) : (
-                  foodData.filter((data) => data.CategoryName === name.CategoryName).map((item) => {
-                    const itemIndex = indexCount++;
+                <div className='row mb-3'>
+                  {filteredItems.map((item) => {
+                    const itemIndex = originalFoodData.findIndex((element) => element._id === item._id);
                     return (
                       <div className="col-md-4 mb-3" key={item._id}>
                         <div className="card food-card">
@@ -155,9 +149,10 @@ const Cards = () => {
                         </div>
                       </div>
                     )
-                  })
-                )}
-              </div> : null
+                  })}
+                </div>
+              </div>
+            ) : null
           })}
         </>
       )}
