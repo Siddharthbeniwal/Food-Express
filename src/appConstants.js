@@ -1,9 +1,15 @@
+let env_url = 'https://foodexpressbackend-s61j.onrender.com';
+
+if(window.location.hostname === 'localhost') {
+  env_url = 'http://localhost:5000';
+}
+
 export const API_URLS = {
-  SIGN_UP: 'http://localhost:5000/api/createUser',
-  LOGIN: 'http://localhost:5000/api/userLogin',
-  DISPLAY_FOOD_DATA: 'http://localhost:5000/api/displayFoodData',
-  CREATE_ORDER: 'http://localhost:5000/api/createOrder',
-  GET_MY_ORDERS: 'http://localhost:5000/api/getMyOrders'
+  SIGN_UP: `${env_url}/api/createUser`,
+  LOGIN: `${env_url}/api/userLogin`,
+  DISPLAY_FOOD_DATA: `${env_url}/api/displayFoodData`,
+  CREATE_ORDER: `${env_url}/api/createOrder`,
+  GET_MY_ORDERS: `${env_url}/api/getMyOrders`
 };
 
 export const ABOUT_US_INFO = {
@@ -20,3 +26,5 @@ export const ABOUT_US_INFO = {
 
   CREDENTIAL: 'johndoe@gmail.com'
 }
+
+export const LOGIN_ALERT_MSG = 'Please login to add items to your cart.'

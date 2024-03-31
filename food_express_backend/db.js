@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-const MONGO_DB_URL = 'mongodb+srv://siddharthbeniwal:Qwerty%401606@cluster0.shrtagm.mongodb.net/foodExpressDb?authMechanism=SCRAM-SHA-1'
+const MONGO_DB_URL = process.env.MONGO_DB_URL
 
 const mongoDb = async () => {
     try {
