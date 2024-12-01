@@ -7,7 +7,8 @@ const initialState = {
     cartData: [],
     originalFoodList: [],
     foodList: [],
-    isLoggedIn: false
+    isLoggedIn: true,
+    isFrontendOnly: true, // Specifies if the project includes backend integration; set to false for making the project as FullStack.
 }
 
 export const foodExpressSlice = createSlice({

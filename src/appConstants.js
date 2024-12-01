@@ -1,8 +1,9 @@
 let env_url = "https://foodexpressbackend-s61j.onrender.com";
 
-if (window.location.hostname === "localhost") {
-  env_url = "http://localhost:5000";
-}
+// use this code when server is running locally
+// if (window.location.hostname === "localhost") {
+//   env_url = "http://localhost:5000";
+// }
 
 export const API_URLS = {
   SIGN_UP: `${env_url}/api/createUser`,
@@ -27,3 +28,11 @@ export const ABOUT_US_INFO = {
 };
 
 export const LOGIN_ALERT_MSG = "Please login to add items to your cart.";
+
+export const SIGN_UP_ALERT_MSG =
+  "SignUp is not available at the moment, please use 'johndoe@gmail.com' as email and password";
+
+export const LOGIN_CREDENTIALS = {
+  DUMMY_USERNAME: "johndoe@gmail.com",
+  DUMMY_PASSWORD: "johndoe@gmail.com",
+};
