@@ -3,15 +3,17 @@ import { Link } from 'react-router-dom'
 import Modal from '../screens/Modal'
 import { Badge } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { SIGN_UP_ALERT_MSG } from '../appConstants'
 import { setIsLoggedIn } from '../features/foodExpressSlice'
 
 const Navbar = () => {
 
-    const [showCart, setShowCart] = useState(false)
+    const [showCart, setShowCart] = useState(false);
 
-    const dispatch = useDispatch()
-    const cartData = useSelector(state => state.cartData)
-    const isLoggedIn = useSelector(state => state.isLoggedIn)
+    const dispatch = useDispatch();
+    const cartData = useSelector(state => state.cartData);
+    const isLoggedIn = useSelector(state => state.isLoggedIn);
+    const isFrontendOnly = useSelector(state => state.isFrontendOnly);
 
     const clearData = () => {
         dispatch(setIsLoggedIn({ type: 'LOGOUT' }))
@@ -21,6 +23,13 @@ const Navbar = () => {
     }
 
     useEffect(() => { }, [isLoggedIn])
+
+    const handleSignUp = () => {
+        if (isFrontendOnly) {
+            alert(SIGN_UP_ALERT_MSG);
+            return;
+        }
+    }
 
     return (
         <div>
@@ -45,14 +54,14 @@ const Navbar = () => {
                             </li> : ''}
                         </ul>
 
-                        {isLoggedIn && localStorage.getItem('username') ? <l className="nav-link text-white fs-5 mx-5">
+                        {isLoggedIn && localStorage.getItem('username') ? <li className="nav-link text-white fs-5 mx-5">
                             Hello, {localStorage.getItem('username')}
-                        </l> : ''}
+                        </li> : ''}
 
                         {!isLoggedIn ?
                             <div className='d-flex'>
                                 <Link className="nav-link text-success bg-white me-3" aria-current="page" to="/login">Login</Link>
-                                <Link className="nav-link text-success bg-white me-3" aria-current="page" to="/signUp">Sign Up</Link>
+                                <Link className="nav-link text-success bg-white me-3" aria-current="page" to="/signUp" onClick={handleSignUp}>Sign Up</Link>
                             </div> :
 
                             <div className='d-flex'>

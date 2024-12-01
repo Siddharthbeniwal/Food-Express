@@ -30,9 +30,16 @@ export const ABOUT_US_INFO = {
 export const LOGIN_ALERT_MSG = "Please login to add items to your cart.";
 
 export const SIGN_UP_ALERT_MSG =
-  "SignUp is not available at the moment, please use 'johndoe@gmail.com' as email and password";
+  "Sign Up is not available at the moment, please login using 'johndoe@gmail.com' as email and password.";
 
 export const LOGIN_CREDENTIALS = {
-  DUMMY_USERNAME: "johndoe@gmail.com",
+  DUMMY_USER_EMAIL: "johndoe@gmail.com",
   DUMMY_PASSWORD: "johndoe@gmail.com",
+  DUMMY_USERNAME: "John Doe",
+};
+
+export const ORDER = {
+  SUCCESS_MSG: "Order placed successfully!",
+  FAILURE_MSG: "Failed to place order!",
+  FETCH_ERROR_MSG: "Could not fetch data.",
 };
