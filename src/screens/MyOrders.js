@@ -5,6 +5,7 @@ import { API_URLS, ORDER } from "../appConstants";
 const MyOrders = () => {
   const [myOrdersList, setMyOrdersList] = useState([]);
   const isFrontendOnly = useSelector((state) => state.isFrontendOnly);
+  const cartData = useSelector((state) => state.cartData);
 
   const fetchMyOrders = async () => {
     const userEmail = localStorage.getItem("userEmail");
@@ -29,6 +30,18 @@ const MyOrders = () => {
 
   useEffect(() => {
     if (isFrontendOnly) {
+      const structuredOrders =
+        cartData?.length > 0
+          ? [
+              {
+                data: [...cartData].reverse(),
+                orderDate: new Date().toDateString(),
+              },
+            ]
+          : [];
+
+      setMyOrdersList(structuredOrders);
+
       return;
     }
     fetchMyOrders();
@@ -39,7 +52,7 @@ const MyOrders = () => {
       <table className="order-table">
         My Orders
         <hr />
-        {myOrdersList.length > 0
+        {myOrdersList?.length > 0
           ? myOrdersList.map((item, index) => (
               <div key={index}>
                 <div style={{ marginTop: "25px" }} />
@@ -68,7 +81,7 @@ const MyOrders = () => {
                 <div style={{ marginBottom: "25px" }} />
               </div>
             ))
-          : "No data to show"}
+          : "No orders to show"}
       </table>
     </div>
   );
