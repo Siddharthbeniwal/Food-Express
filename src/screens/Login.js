@@ -12,7 +12,7 @@ const Login = () => {
   const isFrontendOnly = useSelector((state) => state.isFrontendOnly);
 
   const [userCredentials, setUserCredentials] = useState({
-    email: isFrontendOnly ? LOGIN_CREDENTIALS.DUMMY_USERNAME : "",
+    email: isFrontendOnly ? LOGIN_CREDENTIALS.DUMMY_USER_EMAIL : "",
     password: isFrontendOnly ? LOGIN_CREDENTIALS.DUMMY_PASSWORD : "",
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -29,7 +29,7 @@ const Login = () => {
     return (
       userData?.email &&
       userData?.password &&
-      userData.email === LOGIN_CREDENTIALS.DUMMY_USERNAME &&
+      userData.email === LOGIN_CREDENTIALS.DUMMY_USER_EMAIL &&
       userData.password === LOGIN_CREDENTIALS.DUMMY_PASSWORD
     );
   };
@@ -117,7 +117,7 @@ const Login = () => {
               placeholder="Password"
             />
 
-            <span style={{ marginLeft: "-25px" }}>
+            <span style={{ marginLeft: "-25px", cursor: "pointer" }}>
               <FontAwesomeIcon
                 icon={showPassword ? faEyeSlash : faEye}
                 className="eye-icon"

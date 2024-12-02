@@ -1,18 +1,23 @@
-import React from 'react'
-import ReactDom from 'react-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { API_URLS } from '../appConstants'
-import { handleCart } from '../features/foodExpressSlice'
+import React from 'react';
+import ReactDom from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { API_URLS, ORDER } from '../appConstants';
+import { handleCart } from '../features/foodExpressSlice';
 
 export default function Modal({ onClose }) {
 
-  const cartData = useSelector(state => state.cartData)
-  const dispatch = useDispatch()
-  const totalAmt = cartData.reduce((acc, curr) => acc += curr.price, 0)
+  const cartData = useSelector(state => state.cartData);
+  const isFrontendOnly = useSelector(state => state.isFrontendOnly);
+  const dispatch = useDispatch();
+  const totalAmt = cartData.reduce((acc, curr) => acc += curr.price, 0);
 
   async function createOrder() {
-    const username = localStorage.getItem('username')
-    const userEmail = localStorage.getItem('userEmail')
+    if(isFrontendOnly) {
+      alert(ORDER.SUCCESS_MSG);
+      return;
+    }
+    const username = localStorage.getItem('username');
+    const userEmail = localStorage.getItem('userEmail');
     const response = await fetch(API_URLS.CREATE_ORDER, {
       method: 'POST',
       headers: {
@@ -29,10 +34,10 @@ export default function Modal({ onClose }) {
     const res = await response.json()
 
     if (res.success) {
-      alert('Order placed successfully!')
-      dispatch(handleCart({ type: 'RESET_CART' }))
+      alert(ORDER.SUCCESS_MSG);
+      dispatch(handleCart({ type: 'RESET_CART' }));
     } else {
-      alert('Failed to place order!')
+      alert(ORDER.FAILURE_MSG);
     }
   }
 
