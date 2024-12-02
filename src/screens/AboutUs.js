@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import {
-  ABOUT_US_INFO,
-} from "../appConstants";
+import { ABOUT_US_INFO } from "../appConstants";
 
 const AboutUs = () => {
   const isFrontendOnly = useSelector((state) => state.isFrontendOnly);
+
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = (text) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => setCopied(true))
+      .catch((err) => console.error("Failed to copy text:", err));
+
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <div className="about-us-container">
       <h3>Description:</h3>
@@ -24,9 +34,15 @@ const AboutUs = () => {
       {ABOUT_US_INFO.LOGIN_INFO_2}
       <br />
       <br />
-      Email: {ABOUT_US_INFO.CREDENTIAL}
+      <strong>Email:</strong> {ABOUT_US_INFO.CREDENTIAL}
       <br />
-      Password: {ABOUT_US_INFO.CREDENTIAL}
+      <strong>Password:</strong> {ABOUT_US_INFO.CREDENTIAL}
+      <button
+        onClick={() => handleCopy(ABOUT_US_INFO.CREDENTIAL)}
+        disabled={copied}
+      >
+        {copied ? "Copied!" : "Copy"}
+      </button>
     </div>
   );
 };
