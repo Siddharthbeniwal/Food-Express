@@ -25,5 +25,6 @@ After adding items to the cart, users can review a detailed order summary before
 ![image](https://github.com/user-attachments/assets/fc1eb28e-1da3-4256-a4f8-7d0242cd2c0a)
 
 
-Built with a responsive interface powered by Bootstrap, application ensures an optimized, smooth user experience across all devices, from desktops to mobile phones
+Built with a responsive interface powered by Bootstrap, application ensures an optimized, smooth user experience across all devices, from desktops to mobile phones.
 
+This application is designe and developed by Siddharth Beniwal.
