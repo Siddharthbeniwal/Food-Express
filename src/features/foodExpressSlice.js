@@ -7,7 +7,7 @@ const initialState = {
     cartData: [],
     originalFoodList: [],
     foodList: [],
-    isLoggedIn: true,
+    isLoggedIn: false,
     isFrontendOnly: true, // Specifies if the project includes backend integration; set to false for making the project as FullStack.
 }
 
@@ -123,4 +123,4 @@ export const foodExpressSlice = createSlice({
 
 export default foodExpressSlice.reducer;
 
-export const { setIsLoggedIn, handleQuantity, setInitialData, handleCart, filterFoodList } = foodExpressSlice.actions
+export const { setIsLoggedIn, handleQuantity, setInitialData, handleCart, filterFoodList, isFrontendOnly } = foodExpressSlice.actions

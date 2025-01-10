@@ -111,7 +111,7 @@ const SignUp = () => {
               placeholder="Password"
             />
 
-            <span style={{ marginLeft: "-25px" }}>
+            <span style={{ marginLeft: "-25px", cursor: "pointer" }}>
               <FontAwesomeIcon
                 icon={showPassword ? faEyeSlash : faEye}
                 className="eye-icon"
