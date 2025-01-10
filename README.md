@@ -27,4 +27,4 @@ After adding items to the cart, users can review a detailed order summary before
 
 Built with a responsive interface powered by Bootstrap, application ensures an optimized, smooth user experience across all devices, from desktops to mobile phones.
 
-This application is designe and developed by Siddharth Beniwal.
+This application is designed and developed by Siddharth Beniwal.
