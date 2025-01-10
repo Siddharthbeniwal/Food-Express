@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+#Food Express
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Food Express is a dynamic food Ordering web application developed using the MERN stack (MongoDB, Express.js, React JS, and Node.js), and integrated with Redux Toolkit for efficient and scalable state management. The app fetches the menu, including dishes details such as names, descriptions, prices, and images, from the backend, which retrieves this data from MongoDB. This flexible architecture ensures that future menu updates (like adding or removing items, modifying the descriptions, prices, or images) can be easily managed directly in the database, without requiring any code changes.
 
-## Available Scripts
 
-In the project directory, you can run:
+![image](https://github.com/user-attachments/assets/8a8b375b-d69d-4225-bb70-35d3f8344793)
 
-### `npm start`
+![image](https://github.com/user-attachments/assets/9d9b57ac-f3c9-4636-8200-5fda6f7b08df)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The application includes secure user authentication, with both sign-up and login functionality, protected by JWT (JSON Web Tokens) for secure access. User data such as names and email addresses is stored securely in MongoDB, and passwords are securely encrypted using bcrypt to ensure user privacy.
 
-### `npm test`
+To enhance usability, the application features a search functionality that enables users to quickly find their desired dishes by typing the dish name, making the ordering process faster and more efficient.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+![image](https://github.com/user-attachments/assets/52dd2cd8-b863-44d4-8eb3-96f33e449403)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+After adding items to the cart, users can review a detailed order summary before placing the order. This summary includes the names of the items, quantities, prices, and the total amount, ensuring a transparent and user-friendly checkout process. Additionally, users have convenient access to their order history, displayed in reverse chronological order, allowing them to effortlessly track and review previous purchases.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+![image](https://github.com/user-attachments/assets/f7ac84a8-232b-4bf0-9a02-77690befb209)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![image](https://github.com/user-attachments/assets/fc1eb28e-1da3-4256-a4f8-7d0242cd2c0a)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Built with a responsive interface powered by Bootstrap, application ensures an optimized, smooth user experience across all devices, from desktops to mobile phones
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
