@@ -1,6 +1,8 @@
-#Food Express
+# Food Express
 
 Food Express is a dynamic food Ordering web application developed using the MERN stack (MongoDB, Express.js, React JS, and Node.js), and integrated with Redux Toolkit for efficient and scalable state management. The app fetches the menu, including dishes details such as names, descriptions, prices, and images, from the backend, which retrieves this data from MongoDB. This flexible architecture ensures that future menu updates (like adding or removing items, modifying the descriptions, prices, or images) can be easily managed directly in the database, without requiring any code changes.
+
+You can check out the app here: [Food Express App](https://foodexpress123.netlify.app/)
 
 
 ![image](https://github.com/user-attachments/assets/8a8b375b-d69d-4225-bb70-35d3f8344793)
